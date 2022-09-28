@@ -8,3 +8,16 @@ before_install:
 
 script:
   - docker run -e CI=true nitinsimps/docker-nit npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-south-1"
+  app: "docker-nit"
+  env: "Dockernit-env"
+  bucket_name: "elasticbeanstalk-ap-south-1-706051624453"
+  bucket_path: "docker-nit"
+  on:
+    branch: master
+
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
